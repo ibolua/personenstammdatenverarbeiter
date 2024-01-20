@@ -15,9 +15,7 @@ public interface PersonService {
 
     public List<Person> getAllPersons();
 
-    // public void updatePersonWithId(long id);
-
-    // public Optional<Person> searchPersonWithId(Long id);
+    public Person updatePersonWithId(long id, Person person);
 
     // public String allAdressesFromPerson(long id);
 

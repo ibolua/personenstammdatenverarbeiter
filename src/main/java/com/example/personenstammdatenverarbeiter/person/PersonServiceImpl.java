@@ -44,19 +44,20 @@ public class PersonServiceImpl implements PersonService {
     // 'getAllPersons'");
     // }
 
-    // @Override
-    // public void updatePersonWithId(long id) {
-    // // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method
-    // 'updatePersonWithId'");
-    // }
-
-    // @Override
-    // public Optional<Person> searchPersonWithId(Long id) {
-    // // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method
-    // 'searchPersonWithId'");
-    // }
+    @Override
+    public Person updatePersonWithId(long id, Person newPersonData) {
+        Optional<Person> personOptional = personRepository.findById(id);
+        if (personOptional.isPresent()) {
+            Person person = personOptional.get();
+            person.setAnrede(newPersonData.getAnrede());
+            person.setEmail(newPersonData.getEmail());
+            person.setBirthday(newPersonData.getBirthday());
+            person.setAddress(newPersonData.getAddress());
+            return personRepository.save(person);
+        } else {
+            throw new RuntimeException("Person with ID " + id + " not found");
+        }
+    }
 
     // @Override
     // public String allAdressesFromPerson(long id) {

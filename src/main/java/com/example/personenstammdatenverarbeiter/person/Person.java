@@ -17,8 +17,8 @@ public class Person {
 
     private String anrede;
     private String email;
-    private String geburtsdatum;
-    private String adresse;
+    private String birthday;
+    private String address;
 
     // @ManyToMany
     // private List<Adresse> adresse = new ArrayList<Adresse>();
@@ -43,20 +43,20 @@ public class Person {
         this.email = email;
     }
 
-    public String getGeburtsdatum() {
-        return geburtsdatum;
+    public String getBirthday() {
+        return birthday;
     }
 
-    public void setGeburtsdatum(String geburtsdatum) {
-        this.geburtsdatum = geburtsdatum;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
-    public String getAdresse() {
-        return adresse;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override
@@ -66,8 +66,8 @@ public class Person {
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((anrede == null) ? 0 : anrede.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
-        result = prime * result + ((geburtsdatum == null) ? 0 : geburtsdatum.hashCode());
-        result = prime * result + ((adresse == null) ? 0 : adresse.hashCode());
+        result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
+        result = prime * result + ((address == null) ? 0 : address.hashCode());
         return result;
     }
 
@@ -92,15 +92,15 @@ public class Person {
                 return false;
         } else if (!email.equals(other.email))
             return false;
-        if (geburtsdatum == null) {
-            if (other.geburtsdatum != null)
+        if (birthday == null) {
+            if (other.birthday != null)
                 return false;
-        } else if (!geburtsdatum.equals(other.geburtsdatum))
+        } else if (!birthday.equals(other.birthday))
             return false;
-        if (adresse == null) {
-            if (other.adresse != null)
+        if (address == null) {
+            if (other.address != null)
                 return false;
-        } else if (!adresse.equals(other.adresse))
+        } else if (!address.equals(other.address))
             return false;
         return true;
     }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
 public class PersonController {
@@ -22,7 +23,7 @@ public class PersonController {
     }
 
     @PostMapping("/person")
-    public ResponseEntity<Person> personPost(@RequestBody Person person) {
+    public ResponseEntity<Person> createPerson(@RequestBody Person person) {
         Person savedPerson = personService.savePerson(person);
         return ResponseEntity.ok(savedPerson);
     }
@@ -34,9 +35,15 @@ public class PersonController {
     }
 
     @GetMapping("person/{id}")
-    public ResponseEntity<Optional<Person>> getPersonById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Person>> getPerson(@PathVariable Long id) {
         Optional<Person> foundPerson = personService.findPerson(id);
         return ResponseEntity.ok(foundPerson);
+    }
+
+    @PutMapping("person/{id}")
+    public ResponseEntity<Person> updatePerson(@RequestBody Person person, @PathVariable Long id) {
+        Person updatedPerson = personService.updatePersonWithId(id, person);
+        return ResponseEntity.ok(updatedPerson);
     }
 
 }
