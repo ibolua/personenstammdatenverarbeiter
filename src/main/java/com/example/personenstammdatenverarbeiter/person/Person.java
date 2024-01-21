@@ -1,12 +1,20 @@
 package com.example.personenstammdatenverarbeiter.person;
 
-// import java.util.ArrayList;
-// import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.example.personenstammdatenverarbeiter.Address;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-// import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Person {
@@ -14,25 +22,29 @@ public class Person {
     @Id
     @GeneratedValue
     private long id;
-
-    private String anrede;
+    @NotBlank
+    private String salutation;
+    @NotBlank
+    @Email
     private String email;
+    @NotBlank
     private String birthday;
-    private String address;
 
-    // @ManyToMany
-    // private List<Adresse> adresse = new ArrayList<Adresse>();
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person", fetch = FetchType.EAGER)
+    @JsonManagedReference
+    @NotEmpty
+    private List<Address> addresses = new ArrayList<>();
 
     public long getId() {
         return id;
     }
 
-    public String getAnrede() {
-        return anrede;
+    public String getSalutation() {
+        return salutation;
     }
 
-    public void setAnrede(String anrede) {
-        this.anrede = anrede;
+    public void setSalutation(String salutation) {
+        this.salutation = salutation;
     }
 
     public String getEmail() {
@@ -51,12 +63,12 @@ public class Person {
         this.birthday = birthday;
     }
 
-    public String getAddress() {
-        return address;
+    public List<Address> getAddresses() {
+        return addresses;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
     }
 
     @Override
@@ -64,10 +76,10 @@ public class Person {
         final int prime = 31;
         int result = 1;
         result = prime * result + (int) (id ^ (id >>> 32));
-        result = prime * result + ((anrede == null) ? 0 : anrede.hashCode());
+        result = prime * result + ((salutation == null) ? 0 : salutation.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
-        result = prime * result + ((address == null) ? 0 : address.hashCode());
+        result = prime * result + ((addresses == null) ? 0 : addresses.hashCode());
         return result;
     }
 
@@ -82,10 +94,10 @@ public class Person {
         Person other = (Person) obj;
         if (id != other.id)
             return false;
-        if (anrede == null) {
-            if (other.anrede != null)
+        if (salutation == null) {
+            if (other.salutation != null)
                 return false;
-        } else if (!anrede.equals(other.anrede))
+        } else if (!salutation.equals(other.salutation))
             return false;
         if (email == null) {
             if (other.email != null)
@@ -97,10 +109,10 @@ public class Person {
                 return false;
         } else if (!birthday.equals(other.birthday))
             return false;
-        if (address == null) {
-            if (other.address != null)
+        if (addresses == null) {
+            if (other.addresses != null)
                 return false;
-        } else if (!address.equals(other.address))
+        } else if (!addresses.equals(other.addresses))
             return false;
         return true;
     }

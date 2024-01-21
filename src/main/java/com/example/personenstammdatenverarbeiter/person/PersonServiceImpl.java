@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.example.personenstammdatenverarbeiter.Address;
+
 @Service
 public class PersonServiceImpl implements PersonService {
     Logger logger = LoggerFactory.getLogger(PersonServiceImpl.class);
@@ -19,6 +21,9 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person savePerson(Person person) {
+        for (Address address : person.getAddresses()) {
+            address.setPerson(person);
+        }
         return personRepository.save(person);
     }
 
@@ -37,40 +42,19 @@ public class PersonServiceImpl implements PersonService {
         personRepository.deleteById(id);
     }
 
-    // @Override
-    // public List<Person> getAllPersons() {
-    // // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method
-    // 'getAllPersons'");
-    // }
-
     @Override
     public Person updatePersonWithId(long id, Person newPersonData) {
         Optional<Person> personOptional = personRepository.findById(id);
         if (personOptional.isPresent()) {
             Person person = personOptional.get();
-            person.setAnrede(newPersonData.getAnrede());
+            person.setSalutation(newPersonData.getSalutation());
             person.setEmail(newPersonData.getEmail());
             person.setBirthday(newPersonData.getBirthday());
-            person.setAddress(newPersonData.getAddress());
+            person.setAddresses(newPersonData.getAddresses());
             return personRepository.save(person);
         } else {
             throw new RuntimeException("Person with ID " + id + " not found");
         }
     }
-
-    // @Override
-    // public String allAdressesFromPerson(long id) {
-    // // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method
-    // 'allAdressesFromPerson'");
-    // }
-
-    // @Override
-    // public String deleteAdressesFromPerson(long id) {
-    // // TODO Auto-generated method stub
-    // throw new UnsupportedOperationException("Unimplemented method
-    // 'deleteAdressesFromPerson'");
-    // }
 
 }
