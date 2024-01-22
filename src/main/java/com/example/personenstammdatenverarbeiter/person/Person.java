@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -22,8 +24,9 @@ public class Person {
     @Id
     @GeneratedValue
     private long id;
-    @NotBlank
-    private String salutation;
+
+    @Enumerated(EnumType.STRING)
+    private Salutation salutation;
     @NotBlank
     @Email
     private String email;
@@ -39,11 +42,11 @@ public class Person {
         return id;
     }
 
-    public String getSalutation() {
+    public Salutation getSalutation() {
         return salutation;
     }
 
-    public void setSalutation(String salutation) {
+    public void setSalutation(Salutation salutation) {
         this.salutation = salutation;
     }
 
@@ -94,10 +97,7 @@ public class Person {
         Person other = (Person) obj;
         if (id != other.id)
             return false;
-        if (salutation == null) {
-            if (other.salutation != null)
-                return false;
-        } else if (!salutation.equals(other.salutation))
+        if (salutation != other.salutation)
             return false;
         if (email == null) {
             if (other.email != null)

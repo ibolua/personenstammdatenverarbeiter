@@ -4,6 +4,8 @@ import com.example.personenstammdatenverarbeiter.person.Person;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -17,6 +19,7 @@ public class Address {
     @GeneratedValue
     private long id;
 
+    @Enumerated(EnumType.STRING)
     private AddressLabel label;
     @NotBlank
     private String sreetname;
@@ -130,6 +133,11 @@ public class Address {
             if (other.location != null)
                 return false;
         } else if (!location.equals(other.location))
+            return false;
+        if (person == null) {
+            if (other.person != null)
+                return false;
+        } else if (!person.equals(other.person))
             return false;
         return true;
     }
