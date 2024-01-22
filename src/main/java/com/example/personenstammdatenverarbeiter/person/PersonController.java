@@ -28,12 +28,6 @@ public class PersonController {
         return ResponseEntity.ok(savedPerson);
     }
 
-    @DeleteMapping("person/{id}")
-    public ResponseEntity<Integer> deletePerson(@PathVariable Long id) {
-        personService.deletePersonWithId(id);
-        return ResponseEntity.ok(200);
-    }
-
     @GetMapping("person/{id}")
     public ResponseEntity<Optional<Person>> getPerson(@PathVariable Long id) {
         Optional<Person> foundPerson = personService.findPerson(id);
@@ -44,6 +38,12 @@ public class PersonController {
     public ResponseEntity<Person> updatePerson(@RequestBody Person person, @PathVariable Long id) {
         Person updatedPerson = personService.updatePersonWithId(id, person);
         return ResponseEntity.ok(updatedPerson);
+    }
+
+    @DeleteMapping("person/{id}")
+    public ResponseEntity<Integer> deletePerson(@PathVariable Long id) {
+        personService.deletePersonWithId(id);
+        return ResponseEntity.ok(200);
     }
 
 }

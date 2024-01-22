@@ -22,7 +22,7 @@ public class Address {
     @Enumerated(EnumType.STRING)
     private AddressLabel label;
     @NotBlank
-    private String sreetname;
+    private String streetname;
     @NotBlank
     private String houseNumber;
     @NotBlank
@@ -47,12 +47,12 @@ public class Address {
         this.label = label;
     }
 
-    public String getSreetname() {
-        return sreetname;
+    public String getStreetname() {
+        return streetname;
     }
 
-    public void setSreetname(String sreetname) {
-        this.sreetname = sreetname;
+    public void setStreetname(String sreetname) {
+        this.streetname = sreetname;
     }
 
     public String getHouseNumber() {
@@ -93,7 +93,7 @@ public class Address {
         int result = 1;
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((label == null) ? 0 : label.hashCode());
-        result = prime * result + ((sreetname == null) ? 0 : sreetname.hashCode());
+        result = prime * result + ((streetname == null) ? 0 : streetname.hashCode());
         result = prime * result + ((houseNumber == null) ? 0 : houseNumber.hashCode());
         result = prime * result + ((postcode == null) ? 0 : postcode.hashCode());
         result = prime * result + ((location == null) ? 0 : location.hashCode());
@@ -114,10 +114,10 @@ public class Address {
             return false;
         if (label != other.label)
             return false;
-        if (sreetname == null) {
-            if (other.sreetname != null)
+        if (streetname == null) {
+            if (other.streetname != null)
                 return false;
-        } else if (!sreetname.equals(other.sreetname))
+        } else if (!streetname.equals(other.streetname))
             return false;
         if (houseNumber == null) {
             if (other.houseNumber != null)
