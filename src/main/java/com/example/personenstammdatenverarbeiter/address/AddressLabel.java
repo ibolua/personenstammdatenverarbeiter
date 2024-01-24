@@ -1,4 +1,4 @@
-package com.example.personenstammdatenverarbeiter;
+package com.example.personenstammdatenverarbeiter.address;
 
 public enum AddressLabel {
     PRIVATE,

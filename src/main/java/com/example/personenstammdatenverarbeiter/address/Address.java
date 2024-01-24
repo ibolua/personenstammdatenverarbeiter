@@ -1,4 +1,4 @@
-package com.example.personenstammdatenverarbeiter;
+package com.example.personenstammdatenverarbeiter.address;
 
 import com.example.personenstammdatenverarbeiter.person.Person;
 import com.fasterxml.jackson.annotation.JsonBackReference;
