@@ -3,7 +3,9 @@ package com.example.personenstammdatenverarbeiter.person;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.personenstammdatenverarbeiter.Address;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.example.personenstammdatenverarbeiter.address.Address;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -31,6 +33,7 @@ public class Person {
     @Email
     private String email;
     @NotBlank
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String birthday;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person", fetch = FetchType.EAGER)

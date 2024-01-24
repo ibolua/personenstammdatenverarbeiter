@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.example.personenstammdatenverarbeiter.Address;
+import com.example.personenstammdatenverarbeiter.address.Address;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -20,6 +22,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    @Transactional
     public Person savePerson(Person person) {
         for (Address address : person.getAddresses()) {
             address.setPerson(person);
@@ -38,11 +41,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    @Transactional
     public void deletePersonWithId(long id) {
         personRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public Person updatePersonWithId(long id, Person newPersonData) {
         Optional<Person> personOptional = personRepository.findById(id);
         if (personOptional.isPresent()) {
