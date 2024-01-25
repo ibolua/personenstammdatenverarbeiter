@@ -1,5 +1,6 @@
 package com.example.personenstammdatenverarbeiter.person;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Person {
@@ -29,12 +31,19 @@ public class Person {
 
     @Enumerated(EnumType.STRING)
     private Salutation salutation;
+
+    @NotBlank
+    private String firstname;
+
+    @NotBlank
+    private String lastname;
+
     @NotBlank
     @Email
     private String email;
-    @NotBlank
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private String birthday;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @NotNull
+    private LocalDate birthday;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "person", fetch = FetchType.EAGER)
     @JsonManagedReference
@@ -53,6 +62,22 @@ public class Person {
         this.salutation = salutation;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -61,11 +86,11 @@ public class Person {
         this.email = email;
     }
 
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
     }
 
@@ -83,6 +108,8 @@ public class Person {
         int result = 1;
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((salutation == null) ? 0 : salutation.hashCode());
+        result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
+        result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
         result = prime * result + ((addresses == null) ? 0 : addresses.hashCode());
@@ -102,6 +129,16 @@ public class Person {
             return false;
         if (salutation != other.salutation)
             return false;
+        if (firstname == null) {
+            if (other.firstname != null)
+                return false;
+        } else if (!firstname.equals(other.firstname))
+            return false;
+        if (lastname == null) {
+            if (other.lastname != null)
+                return false;
+        } else if (!lastname.equals(other.lastname))
+            return false;
         if (email == null) {
             if (other.email != null)
                 return false;
@@ -118,6 +155,11 @@ public class Person {
         } else if (!addresses.equals(other.addresses))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Person [salutation=" + salutation + ", firstname=" + firstname + ", lastname=" + lastname + "]";
     }
 
 }
