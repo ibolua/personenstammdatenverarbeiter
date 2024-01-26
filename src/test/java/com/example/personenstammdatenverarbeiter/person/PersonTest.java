@@ -96,8 +96,8 @@ public class PersonTest {
     }
 
     @Test
-    @DisplayName("Create person instance and test setter/toString()")
-    public void person_available() {
+    @DisplayName("Test toString method of Person for including essential attributes")
+    public void toString_includesEssentialPersonAttributes() {
         Person person = new Person();
 
         person.setSalutation(TEST_SALUTATION);
@@ -163,6 +163,51 @@ public class PersonTest {
 
         p2.getAddresses().get(0).setHouseNumber("999");
         assertNotEquals(p1, p2, "Two instances of Person with different attributes should not be equal");
+    }
+
+    @Test
+    @DisplayName("Compare two persons with different salutations")
+    public void equals_differentSalutations_false() {
+        Person p1 = createTestPerson();
+        Person p2 = createTestPerson();
+        p2.setSalutation(Salutation.FEMALE);
+        assertNotEquals(p1, p2, "Persons with different salutations should not be equal");
+    }
+
+    @Test
+    @DisplayName("Compare two persons with different first names")
+    public void equals_differentFirstNames_false() {
+        Person p1 = createTestPerson();
+        Person p2 = createTestPerson();
+        p2.setFirstname("another first name");
+        assertNotEquals(p1, p2, "Persons with different first names should not be equal");
+    }
+
+    @Test
+    @DisplayName("Compare two persons with different last names")
+    public void equals_differentLastNames_false() {
+        Person p1 = createTestPerson();
+        Person p2 = createTestPerson();
+        p2.setLastname("another last name");
+        assertNotEquals(p1, p2, "Persons with different last names should not be equal");
+    }
+
+    @Test
+    @DisplayName("Compare two persons with different emails")
+    public void equals_differentEmails_false() {
+        Person p1 = createTestPerson();
+        Person p2 = createTestPerson();
+        p2.setEmail("another.first.another.last.name@example.com");
+        assertNotEquals(p1, p2, "Persons with different emails should not be equal");
+    }
+
+    @Test
+    @DisplayName("Compare two persons with different birthdays")
+    public void equals_differentBirthdays_false() {
+        Person p1 = createTestPerson();
+        Person p2 = createTestPerson();
+        p2.setBirthday(LocalDate.parse("1999-09-09"));
+        assertNotEquals(p1, p2, "Persons with different birthdays should not be equal");
     }
 
 }

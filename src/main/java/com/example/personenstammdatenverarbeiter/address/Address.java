@@ -142,4 +142,10 @@ public class Address {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Address [label=" + label + ", streetname=" + streetname + ", houseNumber=" + houseNumber + ", postcode="
+                + postcode + ", location=" + location + "]";
+    }
+
 }
