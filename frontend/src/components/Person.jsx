@@ -12,8 +12,6 @@ function Person({ person, onDelete, onEdit, onCreate}) {
       <button onClick={() => onDelete(person.id)}>Delete</button>
       <p></p>
       <button onClick={() => onEdit()}>Edit</button>
-      <button onClick={() => onCreate()}>Create</button>
-
     </div>
   );
 }

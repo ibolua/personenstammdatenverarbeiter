@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Person from "./Person";
-import Navbar from "./StatusBar";
+import StatusBar from "./StatusBar";
+import { useNavigate } from "react-router-dom";
+import { useStore } from "../store";
 
 function PersonList() {
-  const [persons, setPersons] = useState([]);
+  const persons = useStore((state) => state.persons);
+  const setPersons = useStore((state) => state.setPersons);
 
   useEffect(() => {
     async function fetchPersons() {
@@ -23,46 +26,6 @@ function PersonList() {
     fetchPersons();
   }, []);
 
-  const person = {
-    salutation: "MALE",
-    firstname: "John",
-    lastname: "Stone",
-    email: "abc@email.com",
-    birthday: "1995-05-05",
-    addresses: [
-      {
-        label: "PRIVATE",
-        streetname: "Musterstraße",
-        houseNumber: "1",
-        postcode: "12345",
-        location: "Musterstadt",
-      },
-      {
-        label: "BUSINESS",
-        streetname: "Geschäftsstraße",
-        houseNumber: "2",
-        postcode: "67890",
-        location: "Business City",
-      },
-    ],
-  };
-
-  const createPerson = async () => {
-    try {
-      const response = await axios({
-        method: "post",
-        url: `api/person`,
-        headers: {},
-        data: person,
-      });
-      if (response.status === 200) {
-        setPersons((person) => [...persons, response.data]);
-      }
-    } catch (error) {
-      console.error("Failed too create a Person", error);
-    }
-  };
-
   const deletePerson = async (id) => {
     try {
       const response = await axios.delete(`/api/person/${id}`);
@@ -74,19 +37,20 @@ function PersonList() {
     }
   };
 
-  const editPerson = async () => {};
+  const handleEditPersonButton = async () => {};
+
+  const navigate = useNavigate();
+  const handleCreatePersonButton = () => {
+    navigate("/person-add");
+  };
 
   return (
     <div>
-      <Navbar />
+      <StatusBar />
+      <button onClick={handleCreatePersonButton}>Add Person</button>
       {persons.map((person) => (
         <div key={person.id}>
-          <Person
-            person={person}
-            onDelete={deletePerson}
-            onEdit={editPerson}
-            onCreate={createPerson}
-          />
+          <Person person={person} onDelete={deletePerson} onEdit={handleEditPersonButton} />
         </div>
       ))}
     </div>
