@@ -1,12 +1,15 @@
 import React from "react";
+import salutationOptions from "../options/salutationOptions";
+import addressLabelOptions from "../options/addressLabelOptions";
 
-function Person({ person, onDelete, onEdit, onCreate}) {
+function Person({ person, onDelete, onEdit, onCreate }) {
   return (
     <div>
-      {person.salutation} {person.firstname} {person.lastname} {person.email}
+      {salutationOptions[person.salutation]} {person.firstname} {person.lastname} {person.email}
       {person.addresses.map((address) => (
         <div key={address.id}>
-          {address.label} {address.streetname} {address.houseNumber} {address.postcode} {address.location}
+          {addressLabelOptions[address.label]} {address.streetname} {address.houseNumber}{" "}
+          {address.postcode} {address.location}
         </div>
       ))}
       <button onClick={() => onDelete(person.id)}>Delete</button>

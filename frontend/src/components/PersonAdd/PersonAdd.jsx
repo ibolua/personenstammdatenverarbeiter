@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import axios from "axios";
-import { useStore } from "../store";
+import { useStore } from "../../store";
+import Salutation from "./Salutation";
+import Firstname from "./Firstname";
+import Lastname from "./Lastname";
+import Email from "./Email";
+import Birthday from "./Birthday";
+import AddressList from "./Address/AddressList";
 
 const person = {
-  salutation: "MALE",
+  salutation: "DIVERSE",
   firstname: "John",
   lastname: "Stone",
   email: "abc@email.com",
@@ -18,6 +24,13 @@ const person = {
     },
     {
       label: "BUSINESS",
+      streetname: "Musterstraße",
+      houseNumber: "1",
+      postcode: "12345",
+      location: "Musterstadt",
+    },
+    {
+      label: "DELIVERY_ADDRESS",
       streetname: "Geschäftsstraße",
       houseNumber: "2",
       postcode: "67890",
@@ -30,7 +43,7 @@ function PersonAdd() {
   const persons = useStore((state) => state.persons);
   const setPersons = useStore((state) => state.setPersons);
 
-  const createPerson = async () => {
+  const handleSubmit = async () => {
     try {
       const response = await axios({
         method: "post",
@@ -48,9 +61,16 @@ function PersonAdd() {
 
   return (
     <>
-      <div>feld 1</div>
-      <div>feld 2 usw.</div>
-      <button onClick={() => createPerson()}>Save Person</button>
+      <form onSubmit={handleSubmit}>
+        <Salutation></Salutation>
+        <Firstname></Firstname>
+        <Lastname></Lastname>
+        <Email></Email>
+        <Birthday></Birthday>
+        <AddressList></AddressList>
+      </form>
+
+      <button onClick={() => handleSubmit()}>Save Person</button>
     </>
   );
 }

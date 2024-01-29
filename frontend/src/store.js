@@ -3,7 +3,8 @@ import { create } from "zustand";
 const useStore = create((set, get) => ({
   persons: [],
   setPersons: (persons) => set({ persons }),
-  setSnacks: (snacks) => set({ snacks }),
+  address: [],
+  setAddress: (address) => set({ address }),
 }));
 
 export { useStore };

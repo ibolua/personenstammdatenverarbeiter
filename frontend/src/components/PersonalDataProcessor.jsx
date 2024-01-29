@@ -2,7 +2,7 @@ import React from "react";
 import PersonList from "./PersonList";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Welcome from "./Welcome";
-import PersonAdd from "./PersonAdd";
+import PersonAdd from "./PersonAdd/PersonAdd";
 
 function PersonalDataProcessor() {
   return (
