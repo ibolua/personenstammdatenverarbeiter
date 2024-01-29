@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Address from "./Address";
 
-function AddressList() {
-  const [addresses, setAddresses] = useState([1]);
+function AddressList({ onAddressChange }) {
+  const [addresses, setAddresses] = useState([{}]);
 
   const addAddressFormular = () => {
-    setAddresses((addresses) => [...addresses, 1]);
+    setAddresses([...addresses, {}]);
   };
 
   const removeAddress = (index) => {
@@ -18,13 +18,15 @@ function AddressList() {
     <>
       {addresses.map((_, index) => (
         <div key={index}>
-          <Address></Address>
-          <button type="button" onClick={() => removeAddress(index)}>
-            Löschen
-          </button>
+          <Address onChange={(name, value) => onAddressChange(index, name, value)} />
+          {addresses.length > 1 && (
+            <button type="button" onClick={() => removeAddress(index)}>
+              Löschen
+            </button>
+          )}
         </div>
       ))}
-      <button type="button" onClick={() => addAddressFormular()}>
+      <button type="button" onClick={addAddressFormular}>
         Add Address
       </button>
     </>

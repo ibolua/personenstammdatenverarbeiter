@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useStore } from "../../store";
 import Salutation from "./Salutation";
@@ -8,49 +8,26 @@ import Email from "./Email";
 import Birthday from "./Birthday";
 import AddressList from "./Address/AddressList";
 
-const person = {
-  salutation: "DIVERSE",
-  firstname: "John",
-  lastname: "Stone",
-  email: "abc@email.com",
-  birthday: "1995-05-05",
-  addresses: [
-    {
-      label: "PRIVATE",
-      streetname: "Musterstraße",
-      houseNumber: "1",
-      postcode: "12345",
-      location: "Musterstadt",
-    },
-    {
-      label: "BUSINESS",
-      streetname: "Musterstraße",
-      houseNumber: "1",
-      postcode: "12345",
-      location: "Musterstadt",
-    },
-    {
-      label: "DELIVERY_ADDRESS",
-      streetname: "Geschäftsstraße",
-      houseNumber: "2",
-      postcode: "67890",
-      location: "Business City",
-    },
-  ],
-};
-
 function PersonAdd() {
   const persons = useStore((state) => state.persons);
   const setPersons = useStore((state) => state.setPersons);
 
-  const handleSubmit = async () => {
+  const [personData, setPersonData] = useState({
+    salutation: "",
+    firstname: "",
+    lastname: "",
+    email: "",
+    birthday: "",
+    addresses: [{ label: "", streetname: "", houseNumber: "", postcode: "", location: "" }],
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log("personData: ", personData);
+    return;
     try {
-      const response = await axios({
-        method: "post",
-        url: `api/person`,
-        headers: {},
-        data: person,
-      });
+      const response = await axios.post(`api/person`, personData);
       if (response.status === 200) {
         setPersons([...persons, response.data]);
       }
@@ -59,18 +36,28 @@ function PersonAdd() {
     }
   };
 
+  const handlePersonInputChange = (name, value) => {
+    setPersonData({ ...personData, [name]: value });
+  };
+
+  const handleAddressChange = (index, name, value) => {
+    const updatedAddresses = personData.addresses.map((address, idx) =>
+      idx === index ? { ...address, [name]: value } : address
+    );
+    setPersonData({ ...personData, addresses: updatedAddresses });
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <Salutation></Salutation>
-        <Firstname></Firstname>
-        <Lastname></Lastname>
-        <Email></Email>
-        <Birthday></Birthday>
-        <AddressList></AddressList>
+        <Salutation onChange={(value) => handlePersonInputChange("salutation", value)}></Salutation>
+        <Firstname onChange={(value) => handlePersonInputChange("firstname", value)}></Firstname>
+        <Lastname onChange={(value) => handlePersonInputChange("lastname", value)}></Lastname>
+        <Email onChange={(value) => handlePersonInputChange("email", value)}></Email>
+        <Birthday onChange={(value) => handlePersonInputChange("birthday", value)}></Birthday>
+        <AddressList onAddressChange={handleAddressChange} />
+        <button onClick={(e) => handleSubmit(e)}>Save Person</button>
       </form>
-
-      <button onClick={() => handleSubmit()}>Save Person</button>
     </>
   );
 }

@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 
-function Streetname() {
-  const [streetname, setStreetname] = useState("");
-
-  const handleChange = (event) => {
-    setStreetname(event.target.value);
-  };
+function Streetname({ onChange }) {
   return (
     <>
       <label htmlFor="streetname">Straße</label>
@@ -13,8 +8,7 @@ function Streetname() {
         type="text"
         id="streetname"
         name="streetname"
-        value={streetname}
-        onChange={handleChange}
+        onChange={(e) => onChange("streetname", e.target.value)}
       />
     </>
   );

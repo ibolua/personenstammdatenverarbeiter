@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-function Location() {
-  const [location, setLocation] = useState("");
-
-  const handleChange = (event) => {
-    setLocation(event.target.value);
-  };
+function Location({ onChange }) {
   return (
     <>
       <label htmlFor="location">Ort</label>
-      <input type="text" id="location" name="location" value={location} onChange={handleChange} />
+      <input
+        type="text"
+        id="location"
+        name="location"
+        onChange={(e) => onChange("location", e.target.value)}
+      />
     </>
   );
 }

@@ -1,11 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-function Firstname() {
-  const [firstname, setFirstname] = useState("");
-
-  const handleChange = (event) => {
-    setFirstname(event.target.value);
-  };
+function Firstname({ onChange }) {
   return (
     <>
       <label htmlFor="firstname">Vorname</label>
@@ -13,8 +8,7 @@ function Firstname() {
         type="text"
         id="firstname"
         name="firstname"
-        value={firstname}
-        onChange={handleChange}
+        onChange={(e) => onChange(e.target.value)}
       />
     </>
   );

@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 
-function Postcode() {
-  const [postcode, setPostcode] = useState("");
-
-  const handleChange = (event) => {
-    setPostcode(event.target.value);
-  };
+function Postcode({ onChange }) {
   return (
     <>
       <label htmlFor="postcode">PLZ</label>
-      <input type="text" id="postcode" name="postcode" value={postcode} onChange={handleChange} />
+      <input
+        type="text"
+        id="postcode"
+        name="postcode"
+        onChange={(e) => onChange("postcode", e.target.value)}
+      />
     </>
   );
 }

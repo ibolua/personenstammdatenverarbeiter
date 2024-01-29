@@ -1,11 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-function HouseNumber() {
-  const [houseNumber, setHouseNumber] = useState("");
-
-  const handleChange = (event) => {
-    setHouseNumber(event.target.value);
-  };
+function HouseNumber({ onChange }) {
   return (
     <>
       <label htmlFor="houseNumber">Hausnummer</label>
@@ -13,8 +8,7 @@ function HouseNumber() {
         type="text"
         id="houseNumber"
         name="houseNumber"
-        value={houseNumber}
-        onChange={handleChange}
+        onChange={(e) => onChange("houseNumber", e.target.value)}
       />
     </>
   );

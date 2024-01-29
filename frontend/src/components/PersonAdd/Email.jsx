@@ -1,15 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
-function Email() {
-  const [email, setEmail] = useState("");
-
-  const handleChange = (event) => {
-    setEmail(event.target.value);
-  };
+function Email({ onChange }) {
   return (
     <>
       <label htmlFor="email">E-Mail</label>
-      <input type="text" id="email" name="email" value={email} onChange={handleChange} />
+      <input type="text" id="email" name="email" onChange={(e) => onChange(e.target.value)} />
     </>
   );
 }
