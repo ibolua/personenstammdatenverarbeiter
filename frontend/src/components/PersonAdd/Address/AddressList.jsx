@@ -1,32 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import Address from "./Address";
+import { usePersonForm } from "../PersonFormContext";
 
-function AddressList({ onAddressChange }) {
-  const [addresses, setAddresses] = useState([{}]);
+function AddressList() {
+  const { personData, setPersonData, emptyAddressFields } = usePersonForm();
 
-  const addAddressFormular = () => {
-    setAddresses([...addresses, {}]);
+  const addAddress = () => {
+    setPersonData({ ...personData, addresses: [...personData.addresses, emptyAddressFields] });
   };
 
   const removeAddress = (index) => {
-    if (addresses.length > 1) {
-      setAddresses((addresses) => addresses.filter((_, i) => i !== index));
+    if (personData.addresses.length > 1) {
+      const filteredAddresses = personData.addresses.filter((_, i) => i !== index);
+      setPersonData({ ...personData, addresses: filteredAddresses });
     }
   };
 
   return (
     <>
-      {addresses.map((_, index) => (
+      {personData.addresses.map((_, index) => (
         <div key={index}>
-          <Address onChange={(name, value) => onAddressChange(index, name, value)} />
-          {addresses.length > 1 && (
+          <Address index={index} />
+          {personData.addresses.length > 1 && (
             <button type="button" onClick={() => removeAddress(index)}>
               Löschen
             </button>
           )}
         </div>
       ))}
-      <button type="button" onClick={addAddressFormular}>
+      <button type="button" onClick={addAddress}>
         Add Address
       </button>
     </>

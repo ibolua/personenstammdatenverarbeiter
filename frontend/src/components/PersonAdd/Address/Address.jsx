@@ -4,14 +4,14 @@ import Streetname from "./Streetname";
 import HouseNumber from "./HouseNumber";
 import Location from "./Location";
 
-function Address({ onChange }) {
+function Address({ index }) {
   return (
     <>
-      <AddressLabel onChange={(name, value) => onChange(name, value)}></AddressLabel>
-      <Streetname onChange={(name, value) => onChange(name, value)} />
-      <HouseNumber onChange={(name, value) => onChange(name, value)}></HouseNumber>
-      <Postcode onChange={(name, value) => onChange(name, value)}></Postcode>
-      <Location onChange={(name, value) => onChange(name, value)}></Location>
+      <AddressLabel index={index}></AddressLabel>
+      <Streetname index={index}></Streetname>
+      <HouseNumber index={index}></HouseNumber>
+      <Postcode index={index}></Postcode>
+      <Location index={index}></Location>
     </>
   );
 }

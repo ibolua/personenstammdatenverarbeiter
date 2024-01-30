@@ -11,7 +11,6 @@ function PersonList() {
 
   useEffect(() => {
     async function fetchPersons() {
-      console.log(`http://localhost:9090/api/person/all`);
       const response = await axios.get(`/api/person/all`);
 
       if (response.status === 200) {

@@ -1,11 +1,18 @@
 import React from "react";
 
-function Email({ onChange, error }) {
+import { usePersonForm } from "./PersonFormContext";
+
+function Email() {
+  const { personData, setPersonData, errors } = usePersonForm();
+
+  const handleChange = (e) => {
+    setPersonData({ ...personData, email: e.target.value });
+  };
   return (
     <>
       <label htmlFor="email">E-Mail</label>
-      <input type="text" id="email" name="email" onChange={(e) => onChange(e.target.value)} />
-      {error && <div style={{ color: "red" }}>{error}</div>}
+      <input type="text" id="email" name="email" value={personData.email} onChange={handleChange} />
+      {errors.email && <div style={{ color: "red" }}>{errors.email}</div>}
     </>
   );
 }

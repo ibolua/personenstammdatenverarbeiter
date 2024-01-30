@@ -1,11 +1,24 @@
 import React from "react";
 
-function Birthday({ onChange, error }) {
+import { usePersonForm } from "./PersonFormContext";
+
+function Birthday() {
+  const { personData, setPersonData, errors } = usePersonForm();
+
+  const handleChange = (e) => {
+    setPersonData({ ...personData, birthday: e.target.value });
+  };
   return (
     <>
       <label htmlFor="birthday">Geburtstag</label>
-      <input type="date" id="birthday" name="birthday" onChange={(e) => onChange(e.target.value)} />
-      {error && <div style={{ color: "red" }}>{error}</div>}
+      <input
+        type="date"
+        id="birthday"
+        name="birthday"
+        value={personData.birthday}
+        onChange={handleChange}
+      />
+      {errors.birthday && <div style={{ color: "red" }}>{errors.birthday}</div>}
     </>
   );
 }

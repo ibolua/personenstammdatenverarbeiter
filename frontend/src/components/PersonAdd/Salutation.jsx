@@ -1,11 +1,17 @@
 import React from "react";
 import salutationOptions from "../../options/salutationOptions";
+import { usePersonForm } from "./PersonFormContext";
 
-function Salutation({ onChange, error }) {
+function Salutation() {
+  const { personData, setPersonData, errors } = usePersonForm();
+
+  const handleChange = (e) => {
+    setPersonData({ ...personData, salutation: e.target.value });
+  };
   return (
     <>
       <label htmlFor="salutation">Anrede</label>
-      <select defaultValue="" onChange={(e) => onChange(e.target.value)}>
+      <select value={personData.salutation || ""} onChange={handleChange}>
         <option value="" disabled>
           Bitte auswählen
         </option>
@@ -15,7 +21,7 @@ function Salutation({ onChange, error }) {
           </option>
         ))}
       </select>
-      {error && <div style={{ color: "red" }}>{error}</div>}
+      {errors.salutation && <div style={{ color: "red" }}>{errors.salutation}</div>}
     </>
   );
 }
