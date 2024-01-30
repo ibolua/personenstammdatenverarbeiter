@@ -1,7 +1,7 @@
 import React from "react";
 import salutationOptions from "../../options/salutationOptions";
 
-function Salutation({ onChange }) {
+function Salutation({ onChange, error }) {
   return (
     <>
       <label htmlFor="salutation">Anrede</label>
@@ -15,6 +15,7 @@ function Salutation({ onChange }) {
           </option>
         ))}
       </select>
+      {error && <div style={{ color: "red" }}>{error}</div>}
     </>
   );
 }

@@ -1,10 +1,11 @@
 import React from "react";
 
-function Birthday({ onChange }) {
+function Birthday({ onChange, error }) {
   return (
     <>
       <label htmlFor="birthday">Geburtstag</label>
-      <input type="text" id="birthday" name="birthday" onChange={(e) => onChange(e.target.value)} />
+      <input type="date" id="birthday" name="birthday" onChange={(e) => onChange(e.target.value)} />
+      {error && <div style={{ color: "red" }}>{error}</div>}
     </>
   );
 }
