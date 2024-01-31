@@ -7,10 +7,13 @@ function Welcome() {
   };
 
   return (
-    <>
-      <div>Hello</div>
-      <button onClick={showPerson}>Persons</button>
-    </>
+    <div className="grid h-screen place-items-center bg-ase-primary-blue text-white">
+      <button
+        onClick={showPerson}
+        className="px-6 py-3 bg-ase-secondary-mustard rounded-md hover:bg-ase-tertiary-warmgrey transition-colors">
+        Show Persons
+      </button>
+    </div>
   );
 }
 
