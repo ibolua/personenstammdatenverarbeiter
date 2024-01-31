@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Welcome from "./Welcome";
 import PersonAdd from "./PersonAdd/PersonAdd";
 import { PersonFormProvider } from "./PersonAdd/PersonFormContext";
+import PersonEdit from "./PersonAdd/PersonEdit";
 
 function PersonalDataProcessor() {
   return (
@@ -16,6 +17,13 @@ function PersonalDataProcessor() {
           element={
             <PersonFormProvider>
               <PersonAdd />
+            </PersonFormProvider>
+          }></Route>
+        <Route
+          path="/person-edit/:id"
+          element={
+            <PersonFormProvider>
+              <PersonEdit />
             </PersonFormProvider>
           }></Route>
       </Routes>

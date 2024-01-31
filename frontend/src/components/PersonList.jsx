@@ -43,7 +43,9 @@ function PersonList() {
     }
   };
 
-  const handleEditPersonButton = async () => {};
+  const handleEditPersonButton = (id) => {
+    navigate(`/person-edit/${id}`);
+  };
 
   const navigate = useNavigate();
   const handleCreatePersonButton = () => {
