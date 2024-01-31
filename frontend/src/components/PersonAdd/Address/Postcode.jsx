@@ -13,15 +13,20 @@ function Postcode({ index }) {
 
   return (
     <>
-      <label htmlFor="postcode">PLZ</label>
-      <input
-        type="text"
-        id={`postcode-${index}`}
-        name="postcode"
-        value={personData.addresses[index].postcode}
-        onChange={handleChange}
-      />
-      {error && <div style={{ color: "red" }}>{error}</div>}
+      <div className="">
+        <label htmlFor="postcode" className="block font-medium text-gray-700">
+          PLZ
+        </label>
+        {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+        <input
+          type="text"
+          id={`postcode-${index}`}
+          name="postcode"
+          value={personData.postcode}
+          onChange={handleChange}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
     </>
   );
 }

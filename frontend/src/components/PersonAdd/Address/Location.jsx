@@ -13,15 +13,20 @@ function Location({ index }) {
 
   return (
     <>
-      <label htmlFor="location">Ort</label>
-      <input
-        type="text"
-        id={`location-${index}`}
-        name="location"
-        value={personData.addresses[index].location}
-        onChange={handleChange}
-      />
-      {error && <div style={{ color: "red" }}>{error}</div>}
+      <div className="">
+        <label htmlFor="location" className="block font-medium text-gray-700">
+          Ort
+        </label>
+        {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
+        <input
+          type="text"
+          id={`location-${index}`}
+          name="location"
+          value={personData.location}
+          onChange={handleChange}
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
     </>
   );
 }

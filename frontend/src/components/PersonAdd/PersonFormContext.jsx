@@ -76,21 +76,21 @@ export const PersonFormProvider = ({ children }) => {
     const addressErrors = personData.addresses.map((address) => {
       let addressError = {};
       if (!address.label.trim()) {
-        addressError.label = "Pflichtfeld label";
+        addressError.label = "Pflichtfeld";
       }
       if (!address.streetname.trim()) {
-        addressError.streetname = "Pflichtfeld streetname";
+        addressError.streetname = "Pflichtfeld";
       }
       if (!address.houseNumber.trim()) {
-        addressError.houseNumber = "Pflichtfeld houseNumber";
+        addressError.houseNumber = "Pflichtfeld";
       }
       if (!address.postcode.trim()) {
-        addressError.postcode = "Pflichtfeld postcode";
+        addressError.postcode = "Pflichtfeld";
       } else if (!POSTCODE_REGEX.test(address.postcode)) {
         addressError.postcode = "PLZ nicht gültig";
       }
       if (!address.location.trim()) {
-        addressError.location = "Pflichtfeld location";
+        addressError.location = "Pflichtfeld";
       }
       return addressError;
     });
