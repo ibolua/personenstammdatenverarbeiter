@@ -7,8 +7,14 @@ import Email from "./Email";
 import Birthday from "./Birthday";
 import AddressList from "./Address/AddressList";
 import { usePersonForm } from "./PersonFormContext";
+import { useNavigate } from "react-router-dom";
+import StatusBar from "../StatusBar";
 
 function PersonAdd() {
+  const navigate = useNavigate();
+  const showPerson = () => {
+    navigate("/persons");
+  };
   const { personData, setPersonData, errors, validateForm } = usePersonForm();
 
   const handleSubmit = async (e) => {
@@ -33,6 +39,8 @@ function PersonAdd() {
 
   return (
     <>
+      <StatusBar pageinfo="Person Formular"/>
+      <button onClick={showPerson}>Zurück</button>
       <form onSubmit={handleSubmit}>
         <Salutation />
         <Firstname />
