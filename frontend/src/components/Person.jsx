@@ -38,7 +38,7 @@ function Person({ person, onDelete, onEdit }) {
         </button>
         <button
           className="mr-2 px-4 py-2 hover:bg-ase-blue-2 bg-ase-primary-blue font-semibold text-white border border-ase-primary-blue hover:border-ase-blue-2 rounded"
-          onClick={() => onEdit()}>
+          onClick={() => onEdit(person.id)}>
           Bearbeiten
         </button>
       </div>
